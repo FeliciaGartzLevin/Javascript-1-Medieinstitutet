@@ -1,0 +1,14 @@
+.completed{
+	font-style: italic;
+	text-decoration: line-through;
+}
+
+ul{
+	background-color: burlywood;
+	padding: 15px;
+}
+
+li{
+	background-color: bisque;
+	margin: 15px;
+}
