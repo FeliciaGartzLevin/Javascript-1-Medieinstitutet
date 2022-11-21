@@ -31,6 +31,7 @@ const cheatEl = document.querySelector('#cheat');
 const formGuessEl = document.querySelector('#formGuess');
 const inputGuessEl = document.querySelector('#inputGuess');
 const turnoutEl = document.querySelector('#turnout');
+const winCatPopup = document.querySelector('.wincat-wrapper');
 
 // Get a random number between 1-10
 const getRandomNumber = function(max = 10) {
@@ -53,13 +54,22 @@ formGuessEl.addEventListener('submit', (e) => {
 
 		if(currentGuess===correctNumber){
 			guesses ++;
-			
 			console.log('You guessed the right number');
+
+			winCatPopup.style.display = 'block';
+			
+			winCatPopup.addEventListener('click'/*  || 'keypress' */, (e) => {
+			
+				winCatPopup.style.display = 'none';
+			});
+
 		} else if (currentGuess > correctNumber) {
 			// Guess was too high
 			// Increase number of guesses made
 			guesses++;
 			console.log("Guess was too high");
+
+			
 
 		} else if (currentGuess < correctNumber) {
 			// Guess was too low
