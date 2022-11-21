@@ -47,7 +47,7 @@ const todos = [
 // STEG 1
 const renderTodos = () => {
 	todosEl.innerHTML = '';
-	todos.forEach( todo => {
+	todos.forEach(todo => {
 		let cssClasses = "list-group-item";
 
 		if (todo.completed) {
@@ -59,10 +59,10 @@ const renderTodos = () => {
 		}*/
 
 		todosEl.innerHTML += `
-		<li class="${cssClasses}" data-todoId="${todo.id}">
-		${todo.title}
-		</li>`
-		;
+		<li class="${cssClasses}" data-todo-id="${todo.id}">
+			${todo.title}
+		</li> 
+		`;
 
 	});
 }
@@ -73,10 +73,26 @@ newTodoFormEl.addEventListener('submit', e => {
 	// prevent form from being submitted (/page to reload)
 	e.preventDefault();
 
+	// Extract all todo-ids:
+	// const todoId = todos.map(todo => todo.id);
+	// const maxTodoId = Math.max(...todoId);
+	// const newTodoId = maxTodoId + 1;
+
+	// använda reducer istället: 
+	const maxTodoId = todos.reduce((maxId, todo) => {
+		if(todo.id > maxId) {
+			return todo.id;
+		}
+
+		return maxId;
+	}, 0);
+	const newTodoId = maxTodoId + 1;
+
 	const newTodoListItem = newTodoFormEl.newTodo.value;
 
 	todos.push(
 		{
+			id: newTodoId,
 			title: newTodoListItem,
 			completed: false,
 		},
@@ -103,7 +119,7 @@ todosEl.addEventListener('click', (e) => {
 		const clickedTodoId = e.target.dataset.todoId;
 
 		const clickedTodo = todos.find( todo => {
-			return todo.id === clickedTodoId;
+			return todo.id == clickedTodoId;
 		});
 
 		// change completed-status of found todo (to the opposite of what it was (false/true))
