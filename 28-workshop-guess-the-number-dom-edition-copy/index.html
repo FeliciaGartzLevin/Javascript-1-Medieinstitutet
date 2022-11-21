@@ -24,13 +24,17 @@
 
 		<div id="cheat"></div>
 
+		<div class="wincat-container">
+			<img class="position-absolute top-50 start-50 translate-middle" src="wincat.png" alt="cute cat gratulating your win">
+		</div>
+
 		<div class="row mt-5">
 			<div class="col col-md-8 offset-md-2">
 				<form class="form-inline" id="formGuess">
 					<label for="inputGuess">What's your guess?</label>
 
 					<div class="input-group mb-3">
-						<input type="number" min="1" max="10" class="form-control ml-2" id="inputGuess" placeholder="Enter a number">
+						<input type="number" min="1" max="10" class="form-control ml-2" id="inputGuess" name="inputGuess" placeholder="Enter a number">
 
 						<button class="btn btn-success ml-2" type="submit">Get lucky</button>
 						<button class="btn btn-danger ml-2" type="reset">Give up</button>

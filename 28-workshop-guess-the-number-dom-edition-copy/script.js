@@ -6,10 +6,10 @@
  * skickas (submits) så jämför det gissade talet mot svaret och visa utfallet
  * i DOM istället för alert()-rutor.
  *
- * STEG 1
- * En input-box där man kan gissa på ett tal. En knapp för att gissa.
+ * STEG 1✅
+ * En input-box där man kan gissa på ett tal. En knapp för att gissa. 
  *
- * STEG 1.1
+ * STEG 1.1 ✅
  * Visa resultatet i en alert.
  *
  * STEG 1.2
@@ -37,6 +37,44 @@ const getRandomNumber = function(max = 10) {
 	return Math.ceil( Math.random() * max );
 }
 
-let correctNumber;
-let guesses;
+let continueGame = false;
+let correctNumber = getRandomNumber();
+let guesses = 0;
+
+cheatEl.innerHTML = `${correctNumber}`
+
+formGuessEl.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	const currentGuess = Number(inputGuessEl.value);
+
+	alert (`Your guess is: ${currentGuess}`);
+	
+
+		if(currentGuess===correctNumber){
+			guesses ++;
+			
+			console.log('You guessed the right number');
+		} else if (currentGuess > correctNumber) {
+			// Guess was too high
+			// Increase number of guesses made
+			guesses++;
+			console.log("Guess was too high");
+
+		} else if (currentGuess < correctNumber) {
+			// Guess was too low
+			// Increase number of guesses made
+			guesses++;
+			console.log("Guess was too low");
+
+		} else {
+			// Guess was not valid
+			console.log("That's not a number");
+
+		}
+
+	
+});
+
+
 
