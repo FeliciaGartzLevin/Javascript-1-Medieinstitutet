@@ -19,7 +19,7 @@
 <body class="bg-dark text-white">
 	<div id="app" class="container mt-3">
 		<div id="top">
-			<h1>Guess My Number ∞</h1>
+			<h1>Guess My Number Between 1-10 ∞</h1>
 		</div>
 
 		<div id="cheat"></div>
@@ -27,6 +27,8 @@
 		<div class="wincat-wrapper">
 			<img class="position-absolute top-50 start-50 translate-middle" src="wincat.png" alt="cute cat gratulating your win">
 		</div>
+
+		<div id="numberOfGuesses" class="display-6 text-right"></div>
 
 		<div class="row mt-5">
 			<div class="col col-md-8 offset-md-2">
@@ -43,8 +45,10 @@
 			</div>
 		</div>
 
-		<div id="turnout" class="display-1"></div>
+		<div id="turnout" class="display-5 text-center"></div>
 	</div>
+
+	<button id="restartBtn" class="btn btn-warning text-center">Restart game</button>
 
 	<script src="script.js"></script>
 </body>

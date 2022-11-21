@@ -17,6 +17,7 @@ body {
 	position: absolute;
 	bottom: 1rem;
 	right: 1.5rem;
+	display: none;
 }
 
 #formGuess label {
@@ -36,5 +37,14 @@ body {
 }
 
 .wincat-wrapper img{
-	width: 90%;
+	margin: 5% 0;
+	max-width: 80%;
+}
+
+#restartBtn {
+	
+	position: absolute;
+	left: 40%;
+	bottom: 1rem;
+	
 }
