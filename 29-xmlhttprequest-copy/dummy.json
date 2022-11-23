@@ -1,0 +1,6 @@
+{
+    "name": "Johan", 
+    "level": 1337,
+    "teacher": "true"
+}
+// key och value måste skrivas inom dubbelfnuttar, förutom siffror

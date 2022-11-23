@@ -29,6 +29,7 @@
 
 const cheatEl = document.querySelector('#cheat');
 const formGuessEl = document.querySelector('#formGuess');
+const btnGetLucky = formGuessEl.querySelector('button[type=submit]')
 const inputGuessEl = document.querySelector('#inputGuess');
 const turnoutEl = document.querySelector('#turnout');
 const winCatPopup = document.querySelector('.wincat-wrapper');
@@ -40,77 +41,78 @@ const getRandomNumber = function(max = 10) {
 	return Math.ceil( Math.random() * max );
 }
 
-const tellNumberOfGuesses = function() {
-	numberofGuesses.innerHTML = `You guessed ${guesses} times`;
+//Funktion behövs ej eg men ville testa det :)
+const tellNumberOfGuesses = nbrOfGuesses => {
+	numberofGuesses.innerHTML = `You guessed ${nbrOfGuesses} times`;
 }
 
-// let continueGame = false;
 
-
-
+let correctNumber = getRandomNumber();
+let guesses = 0;
+let continueGame = true;
 // visar det rätta numret
 // cheatEl.innerHTML = `${correctNumber}`
+restartBtn.addEventListener('click', () => {
+	location.reload();
+});
+formGuessEl.addEventListener('submit', (e) => {
+	e.preventDefault();
+	guesses++;
+	tellNumberOfGuesses(guesses);
+	// fångar upp gissningen från formen i en variabel 
+	// (och säkerställer att det är en siffra)
+	const currentGuess = Number(inputGuessEl.value);
+	// alert (`Your guess is: ${currentGuess}`);
+	
+		if(currentGuess===correctNumber){
+					// console.log('You guessed the right number');
+			turnoutEl.innerHTML = `Number ${currentGuess} is right 🥳`;
+			winCatPopup.style.display = 'block';
+			
+			winCatPopup.addEventListener('click'/*  || 'keypress' */, (e) => {
+			
+				winCatPopup.style.display = 'none';
+			});
+			//stop user from making more guesses as the guess var correct
+			btnGetLucky.setAttribute('disabled', 'disabled');
 
-// while(exitGame === false){
+		} else if (currentGuess > correctNumber) {
+			// Guess was too high
+			// console.log("Guess was too high");
+			turnoutEl.innerHTML = `Number ${currentGuess} is too high ⬆`;
+		} else { /* (currentGuess < correctNumber)  */ 
+			// Guess was too low
+			// console.log("Guess was too low");
+			turnoutEl.innerHTML = `Number ${currentGuess} is too low ⬇`;
+		} //else { 
+		// behövs ej eftersom vi inte kan få ngt annat än ett nummer
+		// man klarar oss med en else ovan
+		// 	// Guess was not valid
+		// 	// console.log("That's not a number");
+		// 	turnoutEl.innerHTML = `That's not a number`;
+		// }
+	// formGuessEl.reset(); // funkar ej tsm med nedan reset-kod så kan göra som direkt nedan ist
+	inputGuessEl.value = "";
+	inputGuessEl.value.focus();
+});
 
-	let correctNumber = getRandomNumber();
-	let guesses = 0;
-	let continueGame = true;
+// annars:
+formGuessEl.addEventListener('reset', () => {
+	correctNumber=getRandomNumber();
+	guesses = 0;
+	cheatEl.innerHTML = correctNumber;
 
-	restartBtn.addEventListener('click', () => {
-		location.reload();
-	});
+	guesses.innerHTML = tellNumberOfGuesses(guesses);
 
-	formGuessEl.addEventListener('submit', (e) => {
-		e.preventDefault();
+	// empty previous result
+	turnoutEl.innerHTML = "";
 
-		// fångar upp gissningen från formen i en variabel 
-		// (och som omvandlas till en siffra)
-		const currentGuess = Number(inputGuessEl.value);
+	// enable submit-btn again
+	btnGetLucky.removeAttribute('disabled', '');
 
-		// alert (`Your guess is: ${currentGuess}`);
-		
+	inputGuessEl.value.focus(); //funkar ej
+	
+});
 
-			if(currentGuess===correctNumber){
-				guesses ++;
-				tellNumberOfGuesses();
-				// console.log('You guessed the right number');
-				turnoutEl.innerHTML = `Number ${currentGuess} is right 🥳`;
 
-				winCatPopup.style.display = 'block';
-				
-				winCatPopup.addEventListener('click'/*  || 'keypress' */, (e) => {
-				
-					winCatPopup.style.display = 'none';
-				});
-
-			} else if (currentGuess > correctNumber) {
-				// Guess was too high
-				// Increase number of guesses made
-				guesses++;
-				tellNumberOfGuesses();
-				// console.log("Guess was too high");
-				turnoutEl.innerHTML = `Number ${currentGuess} is too high ⬆`;
-
-			} else if (currentGuess < correctNumber) {
-				// Guess was too low
-				// Increase number of guesses made
-				guesses++;
-				tellNumberOfGuesses();
-				// console.log("Guess was too low");
-				turnoutEl.innerHTML = `Number ${currentGuess} is too low ⬇`;
-
-			} else {
-				// Guess was not valid
-				guesses++;
-				tellNumberOfGuesses();
-				// console.log("That's not a number");
-				turnoutEl.innerHTML = `That's not a number`;
-
-			}
-
-		formGuessEl.reset();
-	});
-
-// }
 
