@@ -19,7 +19,7 @@
  */
 
 
-const getJSON = (callback) => {
+const getJSON = (url, callback) => {
     // Create a new XML Http Request
 const request = new XMLHttpRequest();
 
@@ -58,9 +58,11 @@ request.addEventListener('readystatechange', () =>{
 
 });
 
-getJSON('https://jsonplaceholder.typicode.com/users');
+//Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
+request.open('GET', url);
+
 //Send the request
-request.send('https://jsonplaceholder.typicode.com/users');
+request.send();
 
 // //Done?
 // console.log("Request sent!");
@@ -68,7 +70,7 @@ request.send('https://jsonplaceholder.typicode.com/users');
 }
 
 //Get users and output to DOM
-getJSON( (err, users, URL) => {
+getJSON('https://jsonplaceholder.typicode.com/users', (err, users) => {
     console.log("Hello, I am going to output to DOM");
 
     if(err) {
@@ -83,11 +85,6 @@ getJSON( (err, users, URL) => {
    
        });
     }
-
-    //Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
-request.open('GET', URL);
-
-
 });
 
 console.log("All requests sent!");
