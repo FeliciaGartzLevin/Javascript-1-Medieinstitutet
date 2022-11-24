@@ -13,7 +13,13 @@
 // console.log(4)
 // console.log(5)
 
-const getUsers = (callback) => {
+/* * MINI-WORKSHOP: Skriv om getUsers till getJSON och lägg till att den kan
+* hämta vilken URL som helst och ÄNDÅ ta emot en callback som får både om något
+* går fel OCH datan från om requesten lyckas.
+ */
+
+
+const getJSON = (callback) => {
     // Create a new XML Http Request
 const request = new XMLHttpRequest();
 
@@ -47,18 +53,14 @@ request.addEventListener('readystatechange', () =>{
 
             // invoke (call) callback function
             callback("Could not get data");
-
-
         }
     }
 
 });
 
-//Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
-request.open('GET', 'https://jsonplaceholder.typicode.com/users');
-
+getJSON('https://jsonplaceholder.typicode.com/users');
 //Send the request
-request.send();
+request.send('https://jsonplaceholder.typicode.com/users');
 
 // //Done?
 // console.log("Request sent!");
@@ -66,7 +68,7 @@ request.send();
 }
 
 //Get users and output to DOM
-getUsers( (err, users) => {
+getJSON( (err, users, URL) => {
     console.log("Hello, I am going to output to DOM");
 
     if(err) {
@@ -81,11 +83,12 @@ getUsers( (err, users) => {
    
        });
     }
+
+    //Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
+request.open('GET', URL);
+
+
 });
-
-
-
-
 
 console.log("All requests sent!");
 
