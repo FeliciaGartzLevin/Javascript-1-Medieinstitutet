@@ -37,3 +37,58 @@ const getJSON = (url, callback) => {
 	console.log("Request sent!");
 }
 
+// Asynchronous fetch:
+
+// Get cats 😸
+getJSON('data/cats.json', (err, cats) => {
+	if(err){
+		alert("Could not get list of cats. Error was: " + err);
+		return
+	}
+
+	console.log("Got list of cats", cats);
+
+	//get doggos 🐶
+	getJSON('data/dogs.json', (err, dogs) => {
+	
+		console.log("Got list of dogs", dogs);
+	
+		
+	});
+
+		//get birds 🦜
+		getJSON('data/birds.json', (err, birds) => {
+		
+			console.log("Got list of birds", birds);
+		
+			
+		});
+});
+
+
+/* // paralell fetch, on the contrary:
+
+// Get cats 😸
+getJSON('data/cats.json', (err, cats) => {
+	if(err){
+		alert("Could not get list of cats. Error was: " + err);
+		return
+	}
+
+	console.log("Got list of cats", cats);
+});
+
+//get doggos 🐶
+getJSON('data/dogs.json', (err, dogs) => {
+	
+	console.log("Got list of dogs", dogs);
+	
+});
+
+//get birds 🦜
+getJSON('data/birds.json', (err, birds) => {
+	
+	console.log("Got list of birds", birds);
+
+	
+}); */
