@@ -27,28 +27,56 @@ const getJSON = (url) => {
 	});
 }
 
+//Using return instead of below ways of doing it
 console.log("Getting data...");
-
-// Get cats 😸
 getJSON('data/cats.json')
 	.then(cats => {
 		console.log("Got cats?", cats);
 
-		//get doggos 🐶
-		getJSON('data/dogs.json') 
-			.then(dogs => {
-			console.log("Got list of dogs", dogs)
-			})
-				.catch(err => {
-				console.log("No doggos found, reason:", err);
-			});
-
-		})
+		return getJSON('data/dogs.json');
+	})
+	.then(dogs => {
+		console.log("Got dogs?", dogs);
+	})
 	.catch(err => {
-			console.log("NO CATS 4 U! Because:" + cats);
+		console.error("NO CATS 4 U! Reason:", err);
 	});
 
 
+
+/* 
+console.log("Getting data...");
+
+// I give you instead of callback hell: Promise hell 🎆
+
+console.log("Getting data...");
+// Get cats 😸
+getJSON('data/cats.json')
+	.then(cats => {
+		console.log("Got cats?", cats);
+		//Get doggos 🐶
+		getJSON('data/dogs.json')
+			.then(dogs => {
+				console.log("Got dogs?", dogs);
+				//Get birdies 🦜
+				getJSON('data/birds.json')
+					.then(birds => {
+						console.log("Got birds?", birds);
+					})
+					.catch(err => {
+						console.log("No birdos found, reason:", err);
+					});
+
+			})
+			.catch(err => {
+				console.log("No doggos found, reason:", err);
+			});
+	})
+	.catch(err => {
+		console.error("NO CATS 4 U! Reason:", err);
+	});
+
+ */
 /* 
 
 // Asynchronous fetch:
