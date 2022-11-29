@@ -20,6 +20,7 @@ const getCurrentWeather = async city => {
     if(!response.ok){
         throw new Error(`We cannot find that city. Problem is: ${response.status} ${response.statusText}`);
     }
+    
     // convert response from JSON
     const data = await response.json();
 

@@ -10,13 +10,13 @@ Visa en loading-spinner medan man väntar på resultat. Loading-spinner bör äv
 
 Förslag på spinners: <https://tobiasahlin.com/spinkit/>
 
-## 3. Visa väderförhållanden
+## 3. Visa väderförhållanden ✅
 
 Visa väderförhållanden inkl. ikoner i en osorterad lista med klassen `conditions`.
 
 Dokumentation: <https://openweathermap.org/weather-conditions>
 
-## 4. Byt ut card-image mot `day.svg`/`night.svg` beroende på om det är efter solnedgång eller före soluppgång
+## 4. Byt ut card-image mot `day.svg`/`night.svg` beroende på om det är efter solnedgång eller före soluppgång ✅
 
 Kolla på `sys.sunrise` och `sys.sunset` och jämför med nuvarande tid.
 
