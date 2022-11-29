@@ -8,7 +8,7 @@
 const getCatBtn = document.querySelector('#getCatBtn');
 
 
-const getCatImg = async () => {
+/* const getCatImg = async () => {
     const response = await fetch('https://cataas.com/cat?json=true')
 
     if(!response.ok) {
@@ -31,4 +31,33 @@ getCatImg();
 
 getCatBtn.addEventListener('click', () => {
     getCatImg();
+}); */
+
+// Johans lösning:
+
+const get= async (url) => {
+
+    const response = await fetch(url);
+    if(!response.ok) {
+        throw new Error(`Response was not OK! Status returned was: "${res.status} ${res.statusText}".`);
+    }
+
+    return await response.json();
+
+    
+}
+
+const getNewCat= async () => {
+
+    const cat = await get('https://cataas.com/cat?json=true');
+
+    document.querySelector('#catImg').setAttribute('src', `https://cataas.com/${cat.url}`); 
+
+}
+
+getNewCat();
+
+getCatBtn.addEventListener('click', () => {
+    getNewCat();
 });
+
