@@ -40,13 +40,15 @@ document.querySelector('#search-form').addEventListener('submit', async e => {
     // document.querySelector('#search-form').value;
     const city = e.target.query.value.trim();
 
-    if(city.lenght > 3){
+    if(city.length < 3){
 
         alert("Please enter at least 3 chars");
         // return i en if-sats gör att vi inte behöver nästla if-sats. 
         // den går ur satsen och går vidare till nästa kodblock.
         return;
     }
+    
+    // prova lägga in try...catch här ist
     
     // do search
     console.log(`Searching for city: ${city}`);
