@@ -39,17 +39,19 @@ const get= async (url) => {
 
     const response = await fetch(url);
     if(!response.ok) {
-        throw new Error(`Response was not OK! Status returned was: "${res.status} ${res.statusText}".`);
+        throw new Error(`Response was not OK! Status returned was: "${response.status} ${response.statusText}".`);
     }
 
     return await response.json();
-
     
 }
 
 const getNewCat= async () => {
-
-    const cat = await get('https://cataas.com/cat?json=true');
+    try{
+        const cat = await get('https://cataas.com/cat?json=true');
+    } catch (err) {
+        console.log("Caught the error: ", err);
+    }
 
     document.querySelector('#catImg').setAttribute('src', `https://cataas.com/${cat.url}`); 
 
