@@ -49,12 +49,37 @@ document.querySelector('#search-form').addEventListener('submit', async e => {
     }
     
     // prova lägga in try...catch här ist
-    
-    // do search
-    console.log(`Searching for city: ${city}`);
-    const data = await getCurrentWeather(city);
+    const errorEl = document.querySelector('#error');
+    const forecast = document.querySelector('#forecast');
+    const loadingSpinner = document.querySelector('#loading-spinner');
+    // show loading spinner while waiting for result:
+    errorEl.classList.add('hide');
+    loadingSpinner.classList.remove('hide');
+    forecast.classList.add('hide');
 
-    // render current weather conditions
-    renderCurrentWeather(data);
+    try{
+        // do search
+        console.log(`Searching for city: ${city}`);
+        const data = await getCurrentWeather(city);
+        
+        // show forecast card, remove spinner
+        forecast.classList.remove('hide');
+        loadingSpinner.classList.add('hide');
 
+        // render current weather conditions
+        renderCurrentWeather(data);
+
+        // return current weather
+        return data;
+
+    } catch (err) {
+        console.log('Caught the error.', err);
+
+        errorEl.innerText = err;
+        errorEl.classList.remove('hide');
+        forecast.classList.add('hide');
+        loadingSpinner.classList.add('hide')
+        
+    }
+  
 });
