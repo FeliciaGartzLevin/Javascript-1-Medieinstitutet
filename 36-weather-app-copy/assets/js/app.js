@@ -59,15 +59,14 @@ document.querySelector('#search-form').addEventListener('submit', async e => {
 
     try{
         // do search
-        console.log(`Searching for city: ${city}`);
-        const data = await getCurrentWeather(city);
-        
+	    console.log(`Searching for city "${city}"`);
+	    const data = await getCurrentWeather(city);
+
         // show forecast card, remove spinner
         forecast.classList.remove('hide');
         loadingSpinner.classList.add('hide');
 
-        // render current weather conditions
-        renderCurrentWeather(data);
+        renderCurrentWeather(data); 
 
         // return current weather
         return data;
