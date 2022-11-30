@@ -21,6 +21,8 @@ const renderCurrentWeather = data => {
         // om detta inte funkar prova med denna loop nedanför och document.querySelector('.conditions').innerHTML += <li>osv</li>
     });
 
+    const newDate = new Date();
+    console.log(`${newDate.toDateString()} ${newDate.toTimeString()}`);
     
     document.querySelector('#forecast').innerHTML = `
     <div class="card">
@@ -45,6 +47,7 @@ const renderCurrentWeather = data => {
             <ul class="conditions d-flex flex-column">
             ${info}
             </ul>
+            <p><small>Last updated: ${newDate.toLocaleString()}</small></p>
 		</div>
 	</div>
     `;
@@ -60,6 +63,7 @@ const renderCurrentWeather = data => {
     // visa färskhet:
     // klistra in längst upp ovanför ortsnamnet 
     // centrerat och med liten grå (eller opacitets-)text
+
 }
 
 document.querySelector('#search-form').addEventListener('submit', async e => {

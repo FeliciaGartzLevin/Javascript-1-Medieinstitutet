@@ -20,6 +20,6 @@ Dokumentation: <https://openweathermap.org/weather-conditions>
 
 Kolla på `sys.sunrise` och `sys.sunset` och jämför med nuvarande tid.
 
-## 5. Visa "färskhet"
+## 5. Visa "färskhet" ✅
 
 Visa hur länge sedan det var som väderrapporten uppdaterades. Använd gärna Date-klassen och `.toLocaleString()`!
