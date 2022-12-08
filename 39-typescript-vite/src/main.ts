@@ -1,22 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 
-const todosList = document.querySelector('#todos')
+const todosList = document.querySelector('#todos')!
 const newTodoForm = document.querySelector('#new-todo-form')
 
-const getRandomNumber = (max: number = 10) => {
-	return Math.ceil( Math.random() * max )
-}
-const num = getRandomNumber(40)
-console.log("Random number:", num)
+// list of todos
+const todos string[] = []
 
+const renderTodos = () => {
+	todosList.innerHTML = ''
+
+	todos.forEach( todo => {
+		todosList.innerHTML += `<li class="list-group-item">${todo}</li>`
+	});
+}
 newTodoForm?.addEventListener('submit', e => {
 	e.preventDefault()
 
 	const inputNewTodoTitle = document.querySelector<HTMLInputElement>('#new-todo-title')!
 	const newTodoTitle = inputNewTodoTitle.value
-
-	if (todosList) {
-		todosList.innerHTML += `<li>${newTodoTitle}</li>`
-	}
+	
+	// push todo into new list of todos
+	todos.push(newTodoTitle)
 })
