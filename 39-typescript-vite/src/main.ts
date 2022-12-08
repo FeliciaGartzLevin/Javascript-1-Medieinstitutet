@@ -1,20 +1,22 @@
+import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
-import typescriptLogo from './typescript.svg'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>FED22 + TypeScript = 💝</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const todosList = document.querySelector('#todos')
+const newTodoForm = document.querySelector('#new-todo-form')
+
+const getRandomNumber = (max: number = 10) => {
+	return Math.ceil( Math.random() * max )
+}
+const num = getRandomNumber(40)
+console.log("Random number:", num)
+
+newTodoForm?.addEventListener('submit', e => {
+	e.preventDefault()
+
+	const inputNewTodoTitle = document.querySelector<HTMLInputElement>('#new-todo-title')!
+	const newTodoTitle = inputNewTodoTitle.value
+
+	if (todosList) {
+		todosList.innerHTML += `<li>${newTodoTitle}</li>`
+	}
+})
