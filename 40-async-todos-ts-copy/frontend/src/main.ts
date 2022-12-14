@@ -109,3 +109,33 @@ document.querySelector('#new-todo-form')?.addEventListener('submit', async e => 
 })
 
 getTodos()
+
+// ändra mellan completed/not completed i servern och på DOM när man klickar på todon
+
+// lyssna efter klick på hela listan
+document.querySelectorAll<HTMLElement>('ul')?.addEventListener('click', (e) => {
+	const target = (e.target as HTMLElement)
+	// OM tagName är LI, GÖR någonting
+	// (annars gör ingenting)
+	if (target.tagName === "LI") {
+		// e.target.classList.toggle("completed");
+
+		//get the `data-todo-id` attribute from the LI element
+
+		const clickedTodoId = Number(target.dataset.todoId);
+
+		const foundTodo = todos.find( todo => todo.id === clickedTodoId)
+		
+		// if todo was found: change completed-status of found todo 
+		// (to the opposite of what it was (false/true))
+		if(foundTodo) {
+
+		foundTodo.completed = !foundTodo.completed;
+		}
+
+
+		renderTodos();
+		// STOP event from bubbling up (propagate)
+		// e.stopPropagation();
+	}
+})
