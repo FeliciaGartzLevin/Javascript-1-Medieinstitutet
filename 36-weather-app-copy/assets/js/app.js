@@ -80,6 +80,10 @@ document.querySelector('#search-form').addEventListener('submit', async e => {
         return;
     }
     
+   	// save city to localStorage
+	localStorage.setItem('weather_city', city);
+
+
     // prova lägga in try...catch här ist
     const errorEl = document.querySelector('#error');
     const forecast = document.querySelector('#forecast');
@@ -109,8 +113,12 @@ document.querySelector('#search-form').addEventListener('submit', async e => {
         errorEl.innerText = err;
         errorEl.classList.remove('hide');
         forecast.classList.add('hide');
-        loadingSpinner.classList.add('hide')
+        loadingSpinner.classList.add('hide');
         
     }
   
 });
+
+
+// set city-input to any previously saved city in localStorage
+document.querySelector('#query').value = localStorage.getItem('weather_city') ?? ''; 
