@@ -1,3 +1,4 @@
+import {createTodo, fetchTodos} from './api'
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 
@@ -9,8 +10,6 @@ interface ITodo {
 
 // Local variable containing all the todos from the server
 let todos: ITodo[] = []
-
-
 
 
 /**
