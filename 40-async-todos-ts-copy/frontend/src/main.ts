@@ -1,16 +1,10 @@
-import {createTodo, fetchTodos} from './api'
+import {ITodo} from './interface'
+import {createTodo, fetchTodos, } from './api'
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 
-interface ITodo {
-	id?: number,
-	title: string,
-	completed: boolean,
-}
-
 // Local variable containing all the todos from the server
 let todos: ITodo[] = []
-
 
 /**
  * Get todos from server, update `todos`-array and render todos.
@@ -82,7 +76,7 @@ getTodos()
 
 // ändra mellan completed/not completed i servern och på DOM när man klickar på todon
 
-// lyssna efter klick på hela listan
+/* // lyssna efter klick på hela listan
 document.querySelectorAll<HTMLElement>('ul')?.addEventListener('click', (e) => {
 	const target = (e.target as HTMLElement)
 	// OM tagName är LI, GÖR någonting
@@ -103,9 +97,8 @@ document.querySelectorAll<HTMLElement>('ul')?.addEventListener('click', (e) => {
 		foundTodo.completed = !foundTodo.completed;
 		}
 
-
 		renderTodos();
 		// STOP event from bubbling up (propagate)
 		// e.stopPropagation();
 	}
-})
+}) */
