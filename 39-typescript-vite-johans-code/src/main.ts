@@ -10,79 +10,76 @@ type Todo = {
 	completed: boolean,
 }
 
-// list of todos
+// get json-todos from localStorage
+const json = localStorage.getItem('todos') ?? '[]' 
+
+// parse json-todos into an array of todo-objects
+const todos: Todo[] = JSON.parse(json)
+
+/* // list of todos
 const todos: Todo[] = [ 
 	{
-	id: 1,
-	title: "Learn basic JavaScript",
-	completed: true,
+		id: 1,
+		title: "Learn basic JavaScript",
+		completed: true,
 	},
 	{
-	id: 2,
-	title: "Learn advanced JavaScript",
-	completed: true,
+		id: 2,
+		title: "Learn advanced JavaScript",
+		completed: true,
 	},
 	{
-	id: 3,
-	title: "Learn basic TypeScript",
-	completed: false,
+		id: 3,
+		title: "Learn basic TypeScript",
+		completed: false,
 	},
-] 
+ ] */
 
 // render todos
 const renderTodos = () => {
-	/*
-	// transform todos into a string-array of `<li>` elements
-	const listitems = todos.map(todo => {
-		return `<li class="list-group-item">${todo}</li>`
-	})
-
-	// implode li-array to a single string
-	const output = listitems.join('')
-
-	// replace todosList content
-	todosList.innerHTML = output
-	*/
-
 	// replace todosList content
 	todosList.innerHTML = todos
-		.map(todo => 
-			// en ternary operator: if todo.completed=true ge <li> class 'completed'. if todo.completed=false, ge ingen ny class alls
-			`<li class="list-group-item ${todo.completed ? 'completed': ''} data-todo-id="${todo.id}">
+		.map(todo =>
+			`<li class="list-group-item ${todo.completed ? 'completed' : ''}" data-todo-id="${todo.id}">
 				${todo.title}
 			</li>`
-			)
+		)
 		.join('')
 }
 
-// lyssna efter klick på hela listan
-todosList.addEventListener('click', (e) => {
+// save todos to local storage
+const saveTodos = () => {
+	// convert todos-array to JSON
+	const json = JSON.stringify(todos)
+
+	// save JSON to localStorage
+	localStorage.setItem('todos', json)
+}
+
+// listen for click-events on the todo list
+todosList.addEventListener('click', e => {
 	const target = (e.target as HTMLElement)
-	// OM tagName är LI, GÖR någonting
-	// (annars gör ingenting)
+
+	// check if click was on a `li` element
 	if (target.tagName === "LI") {
-		// e.target.classList.toggle("completed");
+		// find id of clicked todo
+		const todoId = Number(target.dataset.todoId)
 
-		//get the `data-todo-id` attribute from the LI element
+		// find the todo with the id of the clicked todo
+		const foundTodo = todos.find(todo => todo.id === todoId)
 
-		const clickedTodoId = Number(target.dataset.todoId);
+		// if we found the todo, toggle its completed status
+		if (foundTodo) {
+			foundTodo.completed = !foundTodo.completed
 
-		const foundTodo = todos.find( todo => todo.id === clickedTodoId)
-		
-		// if todo was found: change completed-status of found todo 
-		// (to the opposite of what it was (false/true))
-		if(foundTodo) {
-
-		foundTodo.completed = !foundTodo.completed;
+			//  save todos to localStorage
+			 saveTodos()
 		}
 
-
-		renderTodos();
-		// STOP event from bubbling up (propagate)
-		// e.stopPropagation();
+		// at last, re-render todo list
+		renderTodos()
 	}
 })
-
 
 // create a new todo form
 newTodoForm?.addEventListener('submit', e => {
@@ -94,23 +91,20 @@ newTodoForm?.addEventListener('submit', e => {
 		return
 	}
 
-	// giving an id to todos
-	const maxTodoId = todos.reduce((maxId, todo) => {
-	if(todo.id > maxId) {
-		return todo.id;
-	}
-
-		return maxId;
-	}, 0);
-	const newTodoId = maxTodoId + 1;
+	// find maximum id in the todos-array
+	const todoIds = todos.map(todo => todo.id)   // todoIds = [1, 2, 3]
+	const maxId = Math.max(0,...todoIds)  // 3
 
 	// push todo into list of todos
 	const newTodo: Todo = {
-		id: newTodoId,
+		id: maxId + 1,
 		title: newTodoTitle,
 		completed: false,
 	}
 	todos.push(newTodo)
+
+	// save todos to localStorage
+	saveTodos()
 
 	// empty input
 	document.querySelector<HTMLInputElement>('#new-todo-title')!.value = ''
@@ -121,4 +115,3 @@ newTodoForm?.addEventListener('submit', e => {
 
 // render all todos
 renderTodos()
-
